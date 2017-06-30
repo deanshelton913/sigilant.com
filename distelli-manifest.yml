@@ -35,8 +35,8 @@ deanshelton913/sigilant:
     #- ping -c 3 registry.npmjs.com
     #- npm config set registry https://registry.npmjs.org
 
-  AfterSuccess:
-    - echo "---AfterSuccess---"
+  AfterBuildSuccess:
+    - echo "---AfterBuildSuccess---"
     - docker tag "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
     - docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
 
@@ -87,12 +87,6 @@ deanshelton913/sigilant:
     # - source ~/.nvm/nvm.sh
     # - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
     # - nvm install v7.8.0
-    - docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" $DISTELLI_DOCKER_ENDPOINT
-    - cid=$(uuidgen)
-    - trap 'sudo docker stop $cid' SIGTERM
-    - sudo -E docker run --name=$cid $DISTELLI_DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS  "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM" &
-    - wait
-    - "true"
     #- echo "-Updating apt-get-"
     #- sudo apt-get -y clean
     #- sudo apt-get -y update
@@ -133,9 +127,13 @@ deanshelton913/sigilant:
     #- sleep 60
 
   Exec:
-    - source ~/.nvm/nvm.sh
-    - nvm use v7.8.0
-    - node app.js
+    - echo "---Exec---"
+    - docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" $DISTELLI_DOCKER_ENDPOINT
+    - cid=$(uuidgen)
+    - trap 'sudo docker stop $cid' SIGTERM
+    - sudo -E docker run --name=$cid $DISTELLI_DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS  "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM" &
+    - wait
+    - "true"
 
   PostStart:
     #- ./register-elb.sh
