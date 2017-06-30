@@ -83,10 +83,11 @@ deanshelton913/sigilant:
     - START=$(date +%s)
     - echo "$START" > "$DISTELLI_TMP_FILENAME"
 
-    # - echo "--Installing deploy dependencies--"
-    # - source ~/.nvm/nvm.sh
-    # - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-    # - nvm install v7.8.0
+    - echo "--Installing deploy dependencies--"
+    - source ~/.nvm/nvm.sh
+    - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+    - nvm install v7.8.0
+    - nvm use 7.8.0
     #- echo "-Updating apt-get-"
     #- sudo apt-get -y clean
     #- sudo apt-get -y update
