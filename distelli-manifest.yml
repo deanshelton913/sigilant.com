@@ -66,7 +66,7 @@ deanshelton913/sigilant:
     # - AWS_SECRET_ACCESS_KEY: "Set in Distelli"
     # - PATH: "/usr/local/bin:$PATH"
     # - test: "Testing"
-    # - DISTELLI_TMP_FILENAME: "$DISTELLI_INSTALLHOME/DISTELLI.$DISTELLI_BUILDNUM.$DISTELLI_RELVERSION.tmp"
+    - DISTELLI_TMP_FILENAME: "$DISTELLI_INSTALLHOME/DISTELLI.$DISTELLI_BUILDNUM.$DISTELLI_RELVERSION.tmp"
 
   InstallTemplates:
     #- "docker-compose.yml"
@@ -80,8 +80,8 @@ deanshelton913/sigilant:
   PreInstall:
     # Use this section to install any deployment pre-requisites.
     - echo "---PreInstall---"
-    # - START=$(date +%s)
-    # - echo "$START" > "$DISTELLI_TMP_FILENAME"
+    - START=$(date +%s)
+    - echo "$START" > "$DISTELLI_TMP_FILENAME"
 
     # - echo "--Installing deploy dependencies--"
     # - source ~/.nvm/nvm.sh
@@ -141,10 +141,10 @@ deanshelton913/sigilant:
     # - publicip=$(curl -s ident.me) || true
     #- publicip=$(hostname -i)
     # - 'echo "You can validate the install by pointing your browser at http://$publicip:$PORT"'
-    # - START=$(cat $DISTELLI_TMP_FILENAME)
-    # - rm "$DISTELLI_TMP_FILENAME"
-    # - END=$(date +%s)
-    # - echo $((END-START)) | awk '{printf " This deploy took %02d minutes and %02d seconds\n",int($1/60), int($1%60)}'
+    - START=$(cat $DISTELLI_TMP_FILENAME)
+    - rm "$DISTELLI_TMP_FILENAME"
+    - END=$(date +%s)
+    - echo $((END-START)) | awk '{printf " This deploy took %02d minutes and %02d seconds\n",int($1/60), int($1%60)}'
     #- echo "Forcing failure in PostStart"
     #- sleep 120
     #- exit 1
