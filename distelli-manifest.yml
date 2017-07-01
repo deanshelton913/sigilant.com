@@ -126,8 +126,8 @@ deanshelton913/sigilant:
     #- echo "Deregistered with the ELB. Waiting 1 minute"
     #- sleep 60
 
-  StartSuccessTime: 240
-  Start:
+  # StartSuccessTime: 240
+  Exec:
     - echo "---Start---"
     - sudo docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" $DISTELLI_DOCKER_ENDPOINT
     - cid=$(uuidgen)
