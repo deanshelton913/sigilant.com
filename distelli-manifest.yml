@@ -133,8 +133,8 @@ deanshelton913/sigilant:
     - cid=$(uuidgen)
     - trap 'sudo docker stop $cid' SIGTERM
     - sudo -E docker run --name=$cid $DISTELLI_DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS  "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM" &
-    # - wait
-    # - "true"
+    - wait
+    - "true"
 
   PostStart:
     - echo "---PostStart---"
